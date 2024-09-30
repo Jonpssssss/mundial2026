@@ -1,5 +1,9 @@
 package Mundial2026;
 
-public class Seleccion {
+import java.util.ArrayList;
 
+public class Seleccion {
+	private String nombre;
+	private Entrenador entrenador;
+	private ArrayList<Jugador> jugadores;
 }

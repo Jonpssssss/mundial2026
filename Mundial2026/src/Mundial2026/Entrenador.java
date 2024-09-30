@@ -1,7 +1,6 @@
 package Mundial2026;
 
-public class Arbitro {
+public class Entrenador {
 	private String nombre;
-	private String pais;
 	private int edad;
 }
