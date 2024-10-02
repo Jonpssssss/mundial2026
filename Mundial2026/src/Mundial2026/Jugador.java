@@ -25,9 +25,9 @@ public class Jugador extends JFrame {
 		setTitle("Jugador");
 		setSize(1000,600);
 		setLocationRelativeTo(null);
-		setLayout(new GridLayout(6, 0, 10, 10));
+		setLayout(new GridLayout(6, 0, 10, 10)); // Divison del espacio
 		
-		JLabel etiquetaNombre = new JLabel("Nombre: ");
+		JLabel etiquetaNombre = new JLabel("Nombre: "); //JLabel == crear una etiqueta
 		nombre = new JTextField();
 		
 		JLabel etiquetaApellido = new JLabel("Apellido: ");
