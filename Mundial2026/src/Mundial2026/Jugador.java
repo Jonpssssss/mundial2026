@@ -23,7 +23,7 @@ public class Jugador extends JFrame {
 	
 	public Jugador() {
 		setTitle("Jugador");
-		setSize(600,600);
+		setSize(1000,600);
 		setLocationRelativeTo(null);
 		setLayout(new GridLayout(6, 0, 10, 10));
 		
@@ -44,7 +44,7 @@ public class Jugador extends JFrame {
         JButton guardarDatos = new JButton("Guardar Datos");
         
         resultado = new JLabel("", SwingConstants.CENTER);
-        resultado.setFont(new Font("Arial", Font.BOLD, 14));
+        //resultado.setFont(new Font("Arial", Font.BOLD, 14));
         
         add(etiquetaNombre);
         add(nombre);
@@ -54,8 +54,6 @@ public class Jugador extends JFrame {
         add(edad);
         add(etiquetaPais);
         add(pais);
-        //add(botonMostrar);
-        //add(botonMostrar, BorderLayout.NORTH);
         add(botonMostrar);
         add(guardarDatos);
         add(resultado);  // Etiqueta que muestra el resultado
@@ -63,7 +61,7 @@ public class Jugador extends JFrame {
         botonMostrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Obtener el nombre y apellido desde los campos de texto
+                // Obtener el nombre, apellido, edad y pais desde los campos de texto
                 String nombre1 = nombre.getText();
                 String apellido1 = apellido.getText();
                 String edad1 = edad.getText();
