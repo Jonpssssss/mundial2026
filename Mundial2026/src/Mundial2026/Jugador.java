@@ -68,7 +68,7 @@ public class Jugador extends JFrame {
                 String pais1 = pais.getText();
 
                 // Mostrar el resultado en la etiqueta
-                resultado.setText("Nombre Completo: " + nombre1 + " " + apellido1 + "Edad:" + edad1 + "Pais"+ pais1);
+                resultado.setText("Nombre Completo: " + nombre1 + " " + apellido1 + " , Edad: " + edad1 + " , Pais: "+ pais1);
             }
         });
     }
