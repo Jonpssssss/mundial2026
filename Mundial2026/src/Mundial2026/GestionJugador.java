@@ -68,7 +68,7 @@ public class GestionJugador extends JFrame {
         add(pais);
         add(botonMostrar);
         add(añadirJugador);
-        add(guardarDatos);
+        //add(guardarDatos);
         add(resultado);  // Etiqueta que muestra el resultado
         
         botonMostrar.addActionListener(new ActionListener() {
