@@ -89,7 +89,6 @@ public class GestionJugador extends JFrame {
         
         //guardarDatos.addActionListener(e -> guardarJugadores());
 	}
-		
 	
 	private void añadirJugador() {
 		// TODO Auto-generated method stub
