@@ -51,7 +51,7 @@ public class GestionJugador extends JFrame {
 
         JButton botonMostrar = new JButton("Mostrar Datos");
         JButton añadirJugador = new JButton("Añadir Jugador");
-        JButton guardarDatos = new JButton("Guardar Datos");
+        //JButton guardarDatos = new JButton("Guardar Datos");
         
         
         

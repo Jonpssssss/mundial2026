@@ -18,7 +18,7 @@ public class GestionSeleccion extends JFrame {
 		setLocationRelativeTo(null);
 		setLayout(new GridLayout(6, 0, 10, 10)); // Divison del espacio
 		
-		JLabel etiquetaPais = new JLabel("Pais: ");
+		JLabel etiquetaPais = new JLabel("Introducce el pais: ");
 		pais = new JTextField();
 		
 		JButton botonAñadirJugadores = new JButton("Añadir Jugadores");

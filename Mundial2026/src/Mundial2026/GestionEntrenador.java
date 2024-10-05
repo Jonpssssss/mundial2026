@@ -17,8 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import Mundial2026.GestionJugador.Jugador;
-
 public class GestionEntrenador extends JFrame {
 	private GestionSeleccion seleccion;
 	private JTextField nombre;
