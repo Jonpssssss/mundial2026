@@ -18,7 +18,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class GestionEntrenador extends JFrame {
-	private GestionSeleccion seleccion;
 	private JTextField nombre;
 	private JTextField apellido;
 	private JTextField edad;
@@ -47,7 +46,7 @@ public class GestionEntrenador extends JFrame {
 
         JButton botonMostrar = new JButton("Mostrar Datos");
         JButton añadirEntrenador = new JButton ("Añadir Entreandor");
-        JButton volver = new JButton ("Volver");
+        //JButton volver = new JButton ("Volver");
         //JButton guardarDatos = new JButton("Guardar Datos");
         
         resultado = new JLabel("", SwingConstants.CENTER);

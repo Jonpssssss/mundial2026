@@ -110,6 +110,8 @@ public class GestionJugador extends JFrame {
         } catch (IOException e) {
         	JOptionPane.showMessageDialog(this, "Error ");
         }
+        
+        
 	}
 
 /*
