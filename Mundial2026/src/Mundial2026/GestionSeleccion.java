@@ -23,12 +23,14 @@ public class GestionSeleccion extends JFrame {
 		
 		JButton botonAñadirJugadores = new JButton("Añadir Jugadores");
 		JButton botonAñadirEntrenador = new JButton("Añadir Entrenador");
+		JButton botonAñadirSeleccion = new JButton ("Añadir Seleccion");
 		
 		add(etiquetaPais);
 		add(pais);
 		
 		add(botonAñadirJugadores);
 		add(botonAñadirEntrenador);
+		add(botonAñadirSeleccion);
 		
 		botonAñadirJugadores.addActionListener(new ActionListener() {
 			
