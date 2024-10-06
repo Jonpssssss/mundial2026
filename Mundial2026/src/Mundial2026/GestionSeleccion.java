@@ -21,9 +21,11 @@ import Mundial2026.GestionJugador.Jugador;
 
 public class GestionSeleccion extends JFrame {
 	private JTextField pais;
-	private static ArrayList<Jugador> jugadores = new ArrayList<>();
+	static ArrayList<Jugador> jugadores = new ArrayList<>();
 	
 	public GestionSeleccion(){
+		
+        System.out.println(jugadores);
 		setTitle("Seleccion");
 		setSize(1000,600);
 		setLocationRelativeTo(null);
@@ -66,18 +68,25 @@ public class GestionSeleccion extends JFrame {
 			
 		@Override
 	            public void actionPerformed(ActionEvent e) {
-	                try {
-	                    Seleccion.guardarEnCSV(pais.getText()+ ".csv");
-	                    JOptionPane.showMessageDialog(null, "Jugadores guardados en seleccion.csv con éxito.");
+				boolean archivoExiste = new File(pais.getText()+ ".csv").exists(); // Verificar si el archivo ya existe
+	                try (PrintWriter writer = new PrintWriter(new FileWriter(pais.getText()+ ".csv", true))){
+	                	if (!archivoExiste) {
+	                        writer.println("Nombre,Apellido,Edad,Pais"); // Cabecera del archivo CSV
+	                    }
+	                	for (Jugador jugador : jugadores) {
+	                		 writer.println(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
+	                    }
+	                	JOptionPane.showMessageDialog(null, "Jugadores guardados en seleccion.csv con éxito.");
 	                } catch (IOException ex) {
 	                    JOptionPane.showMessageDialog(null, "Error al guardar en el archivo CSV.");
 	                    ex.printStackTrace();
 	                }
 	            }
 	        });
-		
-        
 	}
+	
+
+
 
 	public static void main(String[] args) {
 		GestionSeleccion seleccion = new GestionSeleccion();
@@ -97,10 +106,7 @@ public class GestionSeleccion extends JFrame {
 			this.entrenadorSeleccion = entrenadorSeleccion;
 			this.jugadoresSeleccion = new ArrayList<>();
 		}
-		
-	    public void agregarJugadorDesdeLista(Jugador jugador) {
-	    	jugadoresSeleccion.add(jugador);
-	    }
+
 
 		public String getNombreSeleccion() {
 			return nombreSeleccion;
@@ -120,12 +126,6 @@ public class GestionSeleccion extends JFrame {
 
 		public ArrayList<Jugador> getJugadoresSeleccion() {
 			return jugadoresSeleccion;
-		}
-
-		@Override
-		public String toString() {
-			return "Seleccion [nombreSeleccion=" + nombreSeleccion + ", entrenadorSeleccion=" + entrenadorSeleccion
-					+ ", jugadoresSeleccion=" + jugadoresSeleccion + "]";
 		}
 		
 	    public static void guardarEnCSV(String nombreArchivo) throws IOException {
