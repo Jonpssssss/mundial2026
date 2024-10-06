@@ -96,6 +96,7 @@ public class GestionJugador extends JFrame {
         String apellido1 = apellido.getText();
         String edad1 = edad.getText();
         String pais1 = pais.getText();
+        GestionJugador.añadirLista(nombre1, apellido1, edad1, pais1);
         jugadores.add(new Jugador(nombre1, apellido1,edad1,pais1));
         boolean archivoExiste = new File("jugadores.csv").exists(); // Verificar si el archivo ya existe
         try (PrintWriter writer = new PrintWriter(new FileWriter("jugadores.csv", true))) {
@@ -112,6 +113,12 @@ public class GestionJugador extends JFrame {
         }
         
         
+	}
+
+	private static void añadirLista(String nombre, String apellido, String edad, String pais) {
+		// TODO Auto-generated method stub
+		jugadores.add(new Jugador(nombre,apellido,edad,pais));
+		System.out.println(jugadores);
 	}
 
 /*
