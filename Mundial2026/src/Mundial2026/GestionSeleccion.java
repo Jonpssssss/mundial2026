@@ -24,8 +24,6 @@ public class GestionSeleccion extends JFrame {
 	static ArrayList<Jugador> jugadores = new ArrayList<>();
 	
 	public GestionSeleccion(){
-		
-        System.out.println(jugadores);
 		setTitle("Seleccion");
 		setSize(1000,600);
 		setLocationRelativeTo(null);
@@ -85,61 +83,10 @@ public class GestionSeleccion extends JFrame {
 	        });
 	}
 	
-
-
-
 	public static void main(String[] args) {
 		GestionSeleccion seleccion = new GestionSeleccion();
 		seleccion.setVisible(true);
 
-	}
-	
-	private static class Seleccion {
-		private String nombreSeleccion;
-		private String entrenadorSeleccion;
-		private static ArrayList<Jugador> jugadoresSeleccion = new ArrayList<>();
-		
-		
-		public Seleccion(String nombreSeleccion, String entrenadorSeleccion) {
-			super();
-			this.nombreSeleccion = nombreSeleccion;
-			this.entrenadorSeleccion = entrenadorSeleccion;
-			this.jugadoresSeleccion = new ArrayList<>();
-		}
-
-
-		public String getNombreSeleccion() {
-			return nombreSeleccion;
-		}
-
-		public void setNombreSeleccion(String nombreSeleccion) {
-			this.nombreSeleccion = nombreSeleccion;
-		}
-
-		public String getEntrenadorSeleccion() {
-			return entrenadorSeleccion;
-		}
-
-		public void setEntrenadorSeleccion(String entrenadorSeleccion) {
-			this.entrenadorSeleccion = entrenadorSeleccion;
-		}
-
-		public ArrayList<Jugador> getJugadoresSeleccion() {
-			return jugadoresSeleccion;
-		}
-		
-	    public static void guardarEnCSV(String nombreArchivo) throws IOException {
-	    	System.out.println(jugadoresSeleccion);
-	        FileWriter csvWriter = new FileWriter(nombreArchivo);
-	        csvWriter.append("Nombre,Apellido,Edad,Pais");
-	        for (Jugador jugador : jugadoresSeleccion) {
-	            csvWriter.append(jugador.getNombre2()).append(",").append(jugador.getApellido2()).append(jugador.getEdad2()).append(",").append(jugador.getPais2());
-	        }
-	        csvWriter.flush();
-	        csvWriter.close();
-	    }
-		
-		
 	}
 
 }

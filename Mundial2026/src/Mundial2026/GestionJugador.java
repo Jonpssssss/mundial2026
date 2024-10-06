@@ -107,10 +107,19 @@ public class GestionJugador extends JFrame {
                 añadirLista2(nombre1, apellido1, edad1, pais1);
             }
             JOptionPane.showMessageDialog(this, "Jugador agregado: " + nombre1);
+            borrar();
         } catch (IOException e) {
         	JOptionPane.showMessageDialog(this, "Error ");
         }
         
+	}
+	
+	private void borrar() {
+		nombre.setText("");
+		apellido.setText("");
+		edad.setText("");
+		pais.setText("");
+		
 	}
 	
 	private static void añadirLista2(String nombre, String apellido, String edad, String pais) {
@@ -118,13 +127,7 @@ public class GestionJugador extends JFrame {
 		GestionSeleccion.jugadores.add(new Jugador(nombre,apellido,edad,pais));
 		System.out.println(jugadores);
 	}
-	public static ArrayList<Jugador> getJugadores() {
-		return jugadores;
-	}
 
-	public static void setJugadores(ArrayList<Jugador> jugadores) {
-		GestionJugador.jugadores = jugadores;
-	}
 
 /*
 	private void guardarJugadores() {
