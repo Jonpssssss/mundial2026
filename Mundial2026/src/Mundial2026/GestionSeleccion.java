@@ -72,7 +72,9 @@ public class GestionSeleccion extends JFrame {
 	                        writer.println("Nombre,Apellido,Edad,Pais"); // Cabecera del archivo CSV
 	                    }
 	                	for (Jugador jugador : jugadores) {
-	                		 writer.println(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
+	                		if (jugador.getPais2().equals(pais.getText())) {
+	                			writer.println(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
+							}
 	                    }
 	                	JOptionPane.showMessageDialog(null, "Jugadores guardados en seleccion.csv con éxito.");
 	                } catch (IOException ex) {
