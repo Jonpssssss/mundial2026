@@ -46,6 +46,7 @@ public class GestionEntrenador extends JFrame {
 
         JButton botonMostrar = new JButton("Mostrar Datos");
         JButton añadirEntrenador = new JButton ("Añadir Entreandor");
+        JButton cerrar = new JButton ("Todo Perfecto");
         //JButton volver = new JButton ("Volver");
         //JButton guardarDatos = new JButton("Guardar Datos");
         
@@ -62,6 +63,7 @@ public class GestionEntrenador extends JFrame {
         add(pais);
         add(botonMostrar);
         add(añadirEntrenador);
+        add (cerrar);
         //add(volver);
         //add(guardarDatos);
         add(resultado);  // Etiqueta que muestra el resultado
@@ -81,7 +83,13 @@ public class GestionEntrenador extends JFrame {
         });
         
         añadirEntrenador.addActionListener(e -> añadirEntrenador());
+        cerrar.addActionListener(e -> volver());
     }
+
+	private void volver() {
+		// TODO Auto-generated method stub
+		dispose();
+		}
 
 	private void añadirEntrenador() {
 		// TODO Auto-generated method stub
@@ -97,12 +105,20 @@ public class GestionEntrenador extends JFrame {
             }
             for (Entrenador entrenador : entrenadores) {
                 writer.println(entrenador.getNombre2() + "," + entrenador.getApellido2() + "," + entrenador.getEdad2() + "," + entrenador.getPais2());
-               
+               borrar();
             }
             JOptionPane.showMessageDialog(this, "Entrenador agregado: " + nombre1);
         } catch (IOException e) {
         	JOptionPane.showMessageDialog(this, "Error ");
         }
+	}
+	
+	private void borrar() {
+		nombre.setText("");
+		apellido.setText("");
+		edad.setText("");
+		pais.setText("");
+		
 	}
 
 	public static void main(String[] args) {

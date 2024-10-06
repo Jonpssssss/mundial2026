@@ -51,6 +51,7 @@ public class GestionJugador extends JFrame {
 
         JButton botonMostrar = new JButton("Mostrar Datos");
         JButton añadirJugador = new JButton("Añadir Jugador");
+        JButton cerrar = new JButton ("Todo Perfecto");
         //JButton guardarDatos = new JButton("Guardar Datos");
         
         
@@ -68,6 +69,7 @@ public class GestionJugador extends JFrame {
         add(pais);
         add(botonMostrar);
         add(añadirJugador);
+        add(cerrar);
         //add(guardarDatos);
         add(resultado);  // Etiqueta que muestra el resultado
         
@@ -86,9 +88,14 @@ public class GestionJugador extends JFrame {
         });
         
         añadirJugador.addActionListener(e -> añadirJugador());
+        cerrar.addActionListener(e -> volver());
         
         //guardarDatos.addActionListener(e -> guardarJugadores());
 	}
+	private void volver() {
+		// TODO Auto-generated method stub
+		dispose();
+		}
 	
 	private void añadirJugador() {
 		// TODO Auto-generated method stub
@@ -97,6 +104,7 @@ public class GestionJugador extends JFrame {
         String edad1 = edad.getText();
         String pais1 = pais.getText();
         jugadores.add(new Jugador(nombre1, apellido1,edad1,pais1));
+        añadirLista2(nombre1, apellido1, edad1, pais1);
         boolean archivoExiste = new File("jugadores.csv").exists(); // Verificar si el archivo ya existe
         try (PrintWriter writer = new PrintWriter(new FileWriter("jugadores.csv", true))) {
         	if (!archivoExiste) {
@@ -104,7 +112,6 @@ public class GestionJugador extends JFrame {
             }
             for (Jugador jugador : jugadores) {
                 writer.println(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
-                añadirLista2(nombre1, apellido1, edad1, pais1);
             }
             JOptionPane.showMessageDialog(this, "Jugador agregado: " + nombre1);
             borrar();

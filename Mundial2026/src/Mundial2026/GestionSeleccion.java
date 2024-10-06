@@ -76,7 +76,7 @@ public class GestionSeleccion extends JFrame {
 	                			writer.println(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
 							}
 	                    }
-	                	JOptionPane.showMessageDialog(null, "Jugadores guardados en seleccion.csv con éxito.");
+	                	JOptionPane.showMessageDialog(null, "Jugadores guardados en " + pais.getText() + ".csv con éxito.");
 	                } catch (IOException ex) {
 	                    JOptionPane.showMessageDialog(null, "Error al guardar en el archivo CSV.");
 	                    ex.printStackTrace();
