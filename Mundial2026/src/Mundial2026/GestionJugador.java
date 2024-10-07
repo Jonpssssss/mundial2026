@@ -125,8 +125,7 @@ public class GestionJugador extends JFrame {
 		nombre.setText("");
 		apellido.setText("");
 		edad.setText("");
-		pais.setText("");
-		
+		pais.setText("");	
 	}
 	
 	private static void añadirLista2(String nombre, String apellido, String edad, String pais) {
