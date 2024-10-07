@@ -173,8 +173,7 @@ public class GestionEntrenador extends JFrame {
 		}
 		@Override
 		public String toString() {
-			return "Entrenador [nombre2=" + nombre2 + ", apellido2=" + apellido2 + ", edad2=" + edad2 + ", pais2="
-					+ pais2 + "]";
+			return "Entrenador [nombre=" + nombre2 + ", apellido=" + apellido2 + ", edad=" + edad2 + ", pais=" + pais2 + "]";
 		}
 	     
 	}

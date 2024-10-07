@@ -71,7 +71,7 @@ public class GestionJugador extends JFrame {
         add(añadirJugador);
         add(cerrar);
         //add(guardarDatos);
-        add(resultado);  // Etiqueta que muestra el resultado
+        add(resultado);// Etiqueta que muestra el resultado
         
         botonMostrar.addActionListener(new ActionListener() {
             @Override
