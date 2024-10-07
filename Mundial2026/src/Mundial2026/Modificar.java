@@ -19,6 +19,7 @@ import Mundial2026.GestionJugador.Jugador;
 
 public class Modificar extends JFrame {
 	private JComboBox<Jugador> comboBoxJugadores;
+	static ArrayList<Jugador> juga = new ArrayList<>();
 	private JTextField nombre;
 	private JTextField apellido;
 	private JTextField edad;
@@ -32,7 +33,16 @@ public class Modificar extends JFrame {
 	        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	        setLayout(new GridLayout(6, 0, 10, 10));
 	        
-	        comboBoxJugadores = new JComboBox<>(GestionSeleccion.getJugadores().toArray(new Jugador[0]));
+	        ArrayList<Jugador> jugar = GestionSeleccion.getJugadores();
+	        
+	        for (Jugador jugador : jugar) {
+	        	System.out.println(GestionSeleccion.mirarSeleccion());
+				if(jugador.getPais2().equals(GestionSeleccion.mirarSeleccion())) {
+					juga.add(jugador);
+				}
+			}
+	        
+	        comboBoxJugadores = new JComboBox<>(juga.toArray(new Jugador[0]));
 	        nombre = new JTextField();
 	        apellido = new JTextField();
 	        edad = new JTextField();
@@ -53,13 +63,14 @@ public class Modificar extends JFrame {
 	        add(new JLabel());  // Espacio vacío para el layout
 	        add(guardar);
 	        
+	        
 	        comboBoxJugadores.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 	                Jugador seleccionado = (Jugador) comboBoxJugadores.getSelectedItem();
 	                if (seleccionado != null) {
 	                    nombre.setText(seleccionado.getNombre2());
-	                    apellido.setText(seleccionado.getNombre2());
-	                    pais.setText(seleccionado.getNombre2());
+	                    apellido.setText(seleccionado.getApellido2());
+	                    pais.setText(seleccionado.getPais2());
 	                    edad.setText(seleccionado.getEdad2());
 	                }
 	            }

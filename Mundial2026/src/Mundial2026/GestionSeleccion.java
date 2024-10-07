@@ -23,7 +23,7 @@ import Mundial2026.GestionEntrenador.Entrenador;
 import Mundial2026.GestionJugador.Jugador;
 
 public class GestionSeleccion extends JFrame {
-	private JTextField pais;
+	private static JTextField pais;
 	static ArrayList<Entrenador> entrenadores = new ArrayList<>();
 	static ArrayList<Jugador> jugadores = new ArrayList<>();
 	
@@ -113,6 +113,14 @@ public class GestionSeleccion extends JFrame {
 		
 	}
 	
+	public static JTextField getPais() {
+		return pais;
+	}
+
+	public static void setPais(JTextField pais) {
+		GestionSeleccion.pais = pais;
+	}
+
 	public static ArrayList<Entrenador> getEntrenadores() {
 		return entrenadores;
 	}
@@ -133,5 +141,10 @@ public class GestionSeleccion extends JFrame {
 		GestionSeleccion seleccion = new GestionSeleccion();
 		seleccion.setVisible(true);
 
+	}
+
+	public static String mirarSeleccion() {
+		// TODO Auto-generated method stub
+		return GestionSeleccion.pais.getText();
 	}
 }
