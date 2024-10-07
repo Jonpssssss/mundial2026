@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import Mundial2026.GestionEntrenador.Entrenador;
 import Mundial2026.GestionJugador.Jugador;
@@ -39,6 +40,7 @@ public class GestionSeleccion extends JFrame {
 		JButton botonAñadirEntrenador = new JButton("Añadir Entrenador");
 		JButton botonAñadirSeleccion = new JButton ("Añadir Seleccion");
 		
+				
 		add(etiquetaPais);
 		add(pais);
 		

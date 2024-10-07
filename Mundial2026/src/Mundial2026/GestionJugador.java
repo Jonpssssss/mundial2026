@@ -132,6 +132,8 @@ public class GestionJugador extends JFrame {
 		// TODO Auto-generated method stub
 		GestionSeleccion.jugadores.add(new Jugador(nombre,apellido,edad,pais));
 		System.out.println(jugadores);
+		
+		
 	}
 
 
