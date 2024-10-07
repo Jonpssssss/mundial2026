@@ -151,6 +151,12 @@ public class GestionJugador extends JFrame {
 	}
 */
 
+	public static ArrayList<Jugador> getJugadores() {
+		return jugadores;
+	}
+	public static void setJugadores(ArrayList<Jugador> jugadores) {
+		GestionJugador.jugadores = jugadores;
+	}
 	public static void main (String[] args) {
 		 GestionJugador jugador = new GestionJugador();
          jugador.setVisible(true);

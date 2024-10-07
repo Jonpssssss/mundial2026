@@ -3,6 +3,9 @@ package Mundial2026;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -22,14 +25,14 @@ public class Modificar extends JFrame {
 	private JTextField pais;
     private JButton guardar;
 	
-	 public Modificar(ArrayList<Jugador> jugadores) {
+	 public Modificar() {
 	        // Configurar la ventana
 	        setTitle("Modificar Jugador");
-	        setSize(400, 200);
+	        setSize(1000,600);
 	        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	        setLayout(new GridLayout(4, 2));
+	        setLayout(new GridLayout(6, 0, 10, 10));
 	        
-	        comboBoxJugadores = new JComboBox<>(jugadores.toArray(new Jugador[0]));
+	        comboBoxJugadores = new JComboBox<>(GestionSeleccion.getJugadores().toArray(new Jugador[0]));
 	        nombre = new JTextField();
 	        apellido = new JTextField();
 	        edad = new JTextField();
@@ -39,6 +42,16 @@ public class Modificar extends JFrame {
 	        
 	        add(new JLabel("Selecciona un jugador:"));
 	        add(comboBoxJugadores);
+	        add(new JLabel("Nombre:"));
+	        add(nombre);
+	        add(new JLabel("Apellido:"));
+	        add(apellido);
+	        add(new JLabel("Pais:"));
+	        add(pais);
+	        add(new JLabel("Edad:"));
+	        add(edad);
+	        add(new JLabel());  // Espacio vacío para el layout
+	        add(guardar);
 	        
 	        comboBoxJugadores.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
@@ -47,7 +60,7 @@ public class Modificar extends JFrame {
 	                    nombre.setText(seleccionado.getNombre2());
 	                    apellido.setText(seleccionado.getNombre2());
 	                    pais.setText(seleccionado.getNombre2());
-	                    edad.setText(String.valueOf(seleccionado.getEdad2()));
+	                    edad.setText(seleccionado.getEdad2());
 	                }
 	            }
 	        });
@@ -56,18 +69,38 @@ public class Modificar extends JFrame {
 	            public void actionPerformed(ActionEvent e) {
 	                Jugador seleccionado = (Jugador) comboBoxJugadores.getSelectedItem();
 	                if (seleccionado != null) {
-	                    seleccionado.setNombre2(nombre.getText());
-	                    seleccionado.setApellido2(apellido.getText());
-	                    seleccionado.setEdad2(edad.getText());
-	                    seleccionado.setPais2(edad.getText());
-	                    JOptionPane.showMessageDialog(null, "Cambios guardados con éxito.");
+	                    try {
+	                    	seleccionado.setNombre2(nombre.getText());
+		                    seleccionado.setApellido2(apellido.getText());
+		                    seleccionado.setEdad2(edad.getText());
+		                    seleccionado.setPais2(pais.getText());
+		                    guardarJugadores(pais.getText() + ".csv");
+	                        JOptionPane.showMessageDialog(null, "Cambios guardados con éxito.");
+	                    } catch (NumberFormatException ex) {
+	                        JOptionPane.showMessageDialog(null, "Edad inválida. Ingrese un número.");
+	                    } catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 	                }
 	            }
+
+				private void guardarJugadores(String string) throws IOException {
+					// TODO Auto-generated method stub
+					try (BufferedWriter bw = new BufferedWriter(new FileWriter(string))) {
+			            bw.write("nombre,apellido,edad,pais\n"); // Cabecera
+			            ArrayList<Jugador> jugadores = GestionSeleccion.getJugadores(); // Obtener la lista actualizada de jugadores
+			            for (Jugador jugador : jugadores) {
+			                bw.write(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
+			            }
+			        }
+					
+				}
 	        });
 	        
 	 }
 		public static void main(String[] args) {
-			Modificar modificar = new Modificar(null);
+			Modificar modificar = new Modificar();
 	        modificar.setVisible(true);
 		}
 	     

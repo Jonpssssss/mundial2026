@@ -39,6 +39,7 @@ public class GestionSeleccion extends JFrame {
 		JButton botonAñadirJugadores = new JButton("Añadir Jugadores");
 		JButton botonAñadirEntrenador = new JButton("Añadir Entrenador");
 		JButton botonAñadirSeleccion = new JButton ("Añadir Seleccion");
+		JButton modificar = new JButton("Modificar");
 		
 				
 		add(etiquetaPais);
@@ -47,7 +48,19 @@ public class GestionSeleccion extends JFrame {
 		add(botonAñadirJugadores);
 		add(botonAñadirEntrenador);
 		add(botonAñadirSeleccion);
+		add (modificar);
 		
+		System.out.println(jugadores);
+		
+		modificar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Modificar modifi = new Modificar();
+				modifi.setVisible(true);
+			}
+		});		
 		botonAñadirJugadores.addActionListener(new ActionListener() {
 			
 			@Override
@@ -96,8 +109,26 @@ public class GestionSeleccion extends JFrame {
 	                }
 	            }
 	        });
+		
+		
 	}
 	
+	public static ArrayList<Entrenador> getEntrenadores() {
+		return entrenadores;
+	}
+
+	public static void setEntrenadores(ArrayList<Entrenador> entrenadores) {
+		GestionSeleccion.entrenadores = entrenadores;
+	}
+
+	public static ArrayList<Jugador> getJugadores() {
+		return jugadores;
+	}
+
+	public static void setJugadores(ArrayList<Jugador> jugadores) {
+		GestionSeleccion.jugadores = jugadores;
+	}
+
 	public static void main(String[] args) {
 		GestionSeleccion seleccion = new GestionSeleccion();
 		seleccion.setVisible(true);
