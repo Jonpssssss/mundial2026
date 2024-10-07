@@ -17,13 +17,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import Mundial2026.GestionJugador.Jugador;
+
 public class GestionEntrenador extends JFrame {
 	private JTextField nombre;
 	private JTextField apellido;
 	private JTextField edad;
 	private JTextField pais;
     private JLabel resultado;
-    private ArrayList<Entrenador> entrenadores = new ArrayList<>();
+    private static ArrayList<Entrenador> entrenadores = new ArrayList<>();
 	
 	public GestionEntrenador() {
 		setTitle("Entrenador");
@@ -45,7 +47,7 @@ public class GestionEntrenador extends JFrame {
 		
 
         JButton botonMostrar = new JButton("Mostrar Datos");
-        JButton añadirEntrenador = new JButton ("Añadir Entreandor");
+        JButton añadirEntrenador = new JButton ("Añadir Entrenador");
         JButton cerrar = new JButton ("Todo Perfecto");
         //JButton volver = new JButton ("Volver");
         //JButton guardarDatos = new JButton("Guardar Datos");
@@ -98,6 +100,7 @@ public class GestionEntrenador extends JFrame {
         String edad1 = edad.getText();
         String pais1 = pais.getText();
         entrenadores.add(new Entrenador(nombre1, apellido1,edad1,pais1));
+        añadirLista2(nombre1, apellido1, edad1, pais1);
         boolean archivoExiste = new File("entrenadores.csv").exists(); // Verificar si el archivo ya existe
         try (PrintWriter writer = new PrintWriter(new FileWriter("entrenadores.csv", true))) {
         	if (!archivoExiste) {
@@ -119,6 +122,12 @@ public class GestionEntrenador extends JFrame {
 		edad.setText("");
 		pais.setText("");
 		
+	}
+	
+	private static void añadirLista2(String nombre, String apellido, String edad, String pais) {
+		// TODO Auto-generated method stub
+		GestionSeleccion.entrenadores.add(new Entrenador(nombre,apellido,edad,pais));
+		System.out.println(entrenadores);
 	}
 
 	public static void main(String[] args) {

@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -17,10 +18,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Mundial2026.GestionEntrenador.Entrenador;
 import Mundial2026.GestionJugador.Jugador;
 
 public class GestionSeleccion extends JFrame {
 	private JTextField pais;
+	static ArrayList<Entrenador> entrenadores = new ArrayList<>();
 	static ArrayList<Jugador> jugadores = new ArrayList<>();
 	
 	public GestionSeleccion(){
@@ -69,12 +72,20 @@ public class GestionSeleccion extends JFrame {
 				boolean archivoExiste = new File(pais.getText()+ ".csv").exists(); // Verificar si el archivo ya existe
 	                try (PrintWriter writer = new PrintWriter(new FileWriter(pais.getText()+ ".csv", true))){
 	                	if (!archivoExiste) {
+	                		writer.print("Entrenador: ");
+	                		for (Entrenador entrenador : entrenadores) {
+		                		if (entrenador.getPais2().equals(pais.getText())) {
+		                			writer.println(entrenador.getNombre2() + "," + entrenador.getApellido2());
+								}
+		                    }
+	                		writer.print("");
+	                		writer.print("Jugadores: ");
 	                        writer.println("Nombre,Apellido,Edad,Pais"); // Cabecera del archivo CSV
-	                    }
-	                	for (Jugador jugador : jugadores) {
-	                		if (jugador.getPais2().equals(pais.getText())) {
-	                			writer.println(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
-							}
+	                        for (Jugador jugador : jugadores) {
+		                		if (jugador.getPais2().equals(pais.getText())) {
+		                			writer.println(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
+								}
+		                    }
 	                    }
 	                	JOptionPane.showMessageDialog(null, "Jugadores guardados en " + pais.getText() + ".csv con éxito.");
 	                } catch (IOException ex) {
@@ -90,5 +101,4 @@ public class GestionSeleccion extends JFrame {
 		seleccion.setVisible(true);
 
 	}
-
 }
