@@ -42,11 +42,13 @@ public class Modificar extends JFrame {
 	        cargarJugadores(jugar);
 	        
 	        for (Jugador jugador : jugar) {
-	        	System.out.println(GestionSeleccion.mirarSeleccion());
+	        	//System.out.println(GestionSeleccion.mirarSeleccion());
 				if(jugador.getPais2().equals(GestionSeleccion.mirarSeleccion())) {
 					juga.add(jugador);
 				}
 			}
+	        System.out.println(GestionSeleccion.getPais());
+	        System.out.println(juga);
 	        
 	        comboBoxJugadores = new JComboBox<>(juga.toArray(new Jugador[0]));
 	        nombre = new JTextField();
