@@ -31,7 +31,9 @@ public class Modificar extends JFrame {
 	        setTitle("Modificar Jugador");
 	        setSize(1000,600);
 	        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	        setLayout(new GridLayout(6, 0, 10, 10));
+	        setLocationRelativeTo(null);
+	        setLayout(new GridLayout(7, 0, 10, 10));
+	        
 	        
 	        ArrayList<Jugador> jugar = GestionSeleccion.getJugadores();
 	        
@@ -47,6 +49,7 @@ public class Modificar extends JFrame {
 	        apellido = new JTextField();
 	        edad = new JTextField();
 	        pais = new JTextField();
+	        JButton cerrar = new JButton ("Todo Perfecto");
 	        guardar = new JButton("Guardar Cambios");
 	        
 	        
@@ -62,6 +65,10 @@ public class Modificar extends JFrame {
 	        add(edad);
 	        add(new JLabel());  // Espacio vacío para el layout
 	        add(guardar);
+	        add(new JLabel());  // Espacio vacío para el layout
+	        add(cerrar);
+	        
+	        cerrar.addActionListener(e -> volver());
 	        
 	        
 	        comboBoxJugadores.addActionListener(new ActionListener() {
@@ -114,5 +121,10 @@ public class Modificar extends JFrame {
 			Modificar modificar = new Modificar();
 	        modificar.setVisible(true);
 		}
+		
+        private void volver() {
+    		// TODO Auto-generated method stub
+    		dispose();
+    		}
 	     
 }
