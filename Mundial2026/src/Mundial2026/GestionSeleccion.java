@@ -107,6 +107,14 @@ public class GestionSeleccion extends JFrame {
 	                    JOptionPane.showMessageDialog(null, "Error al guardar en el archivo CSV.");
 	                    ex.printStackTrace();
 	                }
+	                boolean archivoExiste1 = new File("selecciones.csv").exists(); // Verificar si el archivo ya existe
+	                try (PrintWriter writer = new PrintWriter(new FileWriter("selecciones.csv", true))){
+	                	if (!archivoExiste) {
+	                		writer.println(pais.getText());
+	                    }
+	                } catch (IOException ex) {	           
+	                    ex.printStackTrace();
+	                }
 	            }
 	        });
 		
@@ -146,5 +154,42 @@ public class GestionSeleccion extends JFrame {
 	public static String mirarSeleccion() {
 		// TODO Auto-generated method stub
 		return GestionSeleccion.pais.getText();
+	}
+	
+	public static class Seleccion {
+		private String pais;
+		private ArrayList<Jugador>jugadores;
+		private ArrayList<Entrenador> entrenadores;
+		
+		public Seleccion(String pais) {
+			super();
+			this.pais = pais;
+			this.jugadores = jugadores;
+			this.entrenadores = entrenadores;
+		}
+		public String getPais() {
+			return pais;
+		}
+		public void setPais(String pais) {
+			this.pais = pais;
+		}
+		public ArrayList<Jugador> getJugadores() {
+			return jugadores;
+		}
+		public void setJugadores(ArrayList<Jugador> jugadores) {
+			this.jugadores = jugadores;
+		}
+		public ArrayList<Entrenador> getEntrenadores() {
+			return entrenadores;
+		}
+		public void setEntrenadores(ArrayList<Entrenador> entrenadores) {
+			this.entrenadores = entrenadores;
+		}
+		@Override
+		public String toString() {
+			return "Seleccion [pais=" + pais +"]";
+		}
+		
+		
 	}
 }
