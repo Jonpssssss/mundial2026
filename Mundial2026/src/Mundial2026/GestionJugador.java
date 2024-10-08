@@ -1,6 +1,7 @@
 package Mundial2026;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -29,6 +30,7 @@ public class GestionJugador extends JFrame {
 	private JTextField pais;
     private JLabel resultado;
     private static ArrayList<Jugador> jugadores = new ArrayList<>();
+    //private static ArrayList<Jugador>jugadores1;
 	
 	public GestionJugador() {
 		setTitle("Jugador");
@@ -110,9 +112,7 @@ public class GestionJugador extends JFrame {
         	if (!archivoExiste) {
                 writer.println("Nombre,Apellido,Edad,Pais"); // Cabecera del archivo CSV
             }
-            for (Jugador jugador : jugadores) {
-                writer.println(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
-            }
+                writer.println(nombre1 + "," + apellido1 + "," + edad1 + "," + pais1 + ",");
             JOptionPane.showMessageDialog(this, "Jugador agregado: " + nombre1);
             borrar();
         } catch (IOException e) {
@@ -208,6 +208,7 @@ public class GestionJugador extends JFrame {
 		public void setPais2(String pais2) {
 			this.pais2 = pais2;
 		}
+		
 
 		@Override
 		public String toString() {

@@ -4,9 +4,12 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,6 +28,7 @@ public class Modificar extends JFrame {
 	private JTextField edad;
 	private JTextField pais;
     private JButton guardar;
+    private ArrayList<Jugador>jugar = new ArrayList<>();
 	
 	 public Modificar() {
 	        // Configurar la ventana
@@ -35,7 +39,7 @@ public class Modificar extends JFrame {
 	        setLayout(new GridLayout(7, 0, 10, 10));
 	        
 	        
-	        ArrayList<Jugador> jugar = GestionSeleccion.getJugadores();
+	        cargarJugadores(jugar);
 	        
 	        for (Jugador jugador : jugar) {
 	        	System.out.println(GestionSeleccion.mirarSeleccion());
@@ -117,6 +121,26 @@ public class Modificar extends JFrame {
 	        });
 	        
 	 }
+		private void cargarJugadores(ArrayList<Jugador>jugar) {
+			File f = new File("jugadores.csv");
+			try {
+				Scanner sc = new Scanner(f);
+				while(sc.hasNextLine()) {
+					String linea = sc.nextLine();
+					String[]campos = linea.split(",");
+					String nombre = campos[0];
+					String apellido = campos[1];
+					String edad = campos[2];
+					String pais = campos[3];
+					Jugador nuevo = new Jugador(nombre,apellido,edad,pais);
+					juga.add(nuevo);
+				}
+			}catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		public static void main(String[] args) {
 			Modificar modificar = new Modificar();
 	        modificar.setVisible(true);
