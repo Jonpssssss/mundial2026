@@ -31,6 +31,7 @@ public class SorteoGrupos extends JFrame{
 		
 		JButton sorteo = new JButton ("Realizar Sorteo");
 		areaResultado = new JTextArea();
+        areaResultado.setEditable(false);
 		
 		sorteo.addActionListener(e -> crearSorteo());
 		
