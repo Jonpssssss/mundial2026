@@ -98,6 +98,7 @@ public class Modificar extends JFrame {
 		                    seleccionado.setApellido2(apellido.getText());
 		                    seleccionado.setEdad2(edad.getText());
 		                    seleccionado.setPais2(pais.getText());
+		                    guardarJugadores("jugadores.csv");
 		                    guardarJugadores(pais.getText() + ".csv");
 	                        JOptionPane.showMessageDialog(null, "Cambios guardados con éxito.");
 	                    } catch (NumberFormatException ex) {
@@ -112,10 +113,10 @@ public class Modificar extends JFrame {
 				private void guardarJugadores(String string) throws IOException {
 					// TODO Auto-generated method stub
 					try (BufferedWriter bw = new BufferedWriter(new FileWriter(string))) {
-			            bw.write("nombre,apellido,edad,pais\n"); // Cabecera
-			            ArrayList<Jugador> jugadores = GestionSeleccion.getJugadores(); // Obtener la lista actualizada de jugadores
-			            for (Jugador jugador : jugadores) {
-			                bw.write(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
+			            //bw.write("nombre,apellido,edad,pais\n"); // Cabecera
+			            //ArrayList<Jugador> jugadores = GestionSeleccion.getJugadores(); // Obtener la lista actualizada de jugadores
+			            for (Jugador jugador : juga) {
+			                bw.write(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2() + "\n");
 			            }
 			        }
 					
