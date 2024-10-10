@@ -1,5 +1,6 @@
 package Mundial2026;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +14,9 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -31,24 +34,31 @@ public class GestionSeleccion extends JFrame {
 		setTitle("Seleccion");
 		setSize(1000,600);
 		setLocationRelativeTo(null);
-		setLayout(new GridLayout(6, 0, 10, 10)); // Divison del espacio
+		setLayout(new BorderLayout());
+		JPanel panelCentral = new JPanel(new GridLayout(6, 2, 10, 10)); // Divison del espacio
 		
 		JLabel etiquetaPais = new JLabel("Introducce el pais: ");
-		pais = new JTextField();
+        pais = new JTextField();
+
+        JButton botonAñadirJugadores = new JButton("Añadir Jugadores");
+        JButton botonAñadirEntrenador = new JButton("Añadir Entrenador");
+        JButton botonAñadirSeleccion = new JButton("Añadir Seleccion");
+        JButton modificar = new JButton("Modificar");
+
+        panelCentral.add(etiquetaPais);
+        panelCentral.add(pais);
+        panelCentral.add(botonAñadirJugadores);
+        panelCentral.add(botonAñadirEntrenador);
+        panelCentral.add(botonAñadirSeleccion);
+        panelCentral.add(modificar);
+        
+        add(panelCentral, BorderLayout.CENTER);
 		
-		JButton botonAñadirJugadores = new JButton("Añadir Jugadores");
-		JButton botonAñadirEntrenador = new JButton("Añadir Entrenador");
-		JButton botonAñadirSeleccion = new JButton ("Añadir Seleccion");
-		JButton modificar = new JButton("Modificar");
+		JList<Jugador> listaJugadores = new JList<>(jugadores.toArray(new Jugador[0]));
+		listaJugadores.setFixedCellWidth(200);
 		
-				
-		add(etiquetaPais);
-		add(pais);
-		
-		add(botonAñadirJugadores);
-		add(botonAñadirEntrenador);
-		add(botonAñadirSeleccion);
-		add (modificar);
+		JScrollPane panel = new JScrollPane(listaJugadores);
+		add(panel, BorderLayout.WEST);
 		
 		System.out.println(jugadores);
 		
