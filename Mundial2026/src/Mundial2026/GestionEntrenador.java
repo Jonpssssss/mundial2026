@@ -91,6 +91,8 @@ public class GestionEntrenador extends JFrame {
 	private void volver() {
 		// TODO Auto-generated method stub
 		dispose();
+		GestionSeleccion seleccion = new GestionSeleccion();
+		seleccion.setVisible(true);
 		}
 
 	private void añadirEntrenador() {

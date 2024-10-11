@@ -5,11 +5,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -53,14 +55,37 @@ public class GestionSeleccion extends JFrame {
         panelCentral.add(modificar);
         
         add(panelCentral, BorderLayout.CENTER);
+        
+        ArrayList<Jugador> jugador1 = new ArrayList<>();
+        System.out.println(jugador1);
+		ArrayList<Entrenador>entrenador1 = new ArrayList<>();
 		
-		JList<Jugador> listaJugadores = new JList<>(jugadores.toArray(new Jugador[0]));
-		listaJugadores.setFixedCellWidth(200);
 		
-		JScrollPane panel = new JScrollPane(listaJugadores);
-		add(panel, BorderLayout.WEST);
+        cargarJugadores(jugador1);
+        System.out.println(jugador1);
+        //jugadores = jugador1;
+        cargarEntrenadores(entrenador1);
+        //entrenadores = entrenador1;
+        
+        JTextArea jugadoresArea = new JTextArea();
+        jugadoresArea.setEditable(false); // No editable
+        jugadoresArea.setLineWrap(true);  // Ajusta líneas automáticamente
+        jugadoresArea.setWrapStyleWord(true); // Ajusta palabras completas
+        
+     // Añadimos los jugadores al JTextArea
+        for (Jugador jugador : jugador1) {
+            jugadoresArea.append(jugador.getNombre2() + " " + jugador.getApellido2() + "\n");
+        }
+
+
+        // Añadimos un JScrollPane para manejar varios jugadores
+        JScrollPane panel = new JScrollPane(jugadoresArea);
+        panel.setPreferredSize(new java.awt.Dimension(200, panel.getPreferredSize().height)); // Ancho fijo de 200
+
+        add(panel, BorderLayout.WEST);
+        
 		
-		System.out.println(jugadores);
+		//System.out.println(jugadores);
 		
 		modificar.addActionListener(new ActionListener() {
 			
@@ -69,6 +94,7 @@ public class GestionSeleccion extends JFrame {
 				// TODO Auto-generated method stub
 				Modificar modifi = new Modificar();
 				modifi.setVisible(true);
+				dispose();
 			}
 		});		
 		botonAñadirJugadores.addActionListener(new ActionListener() {
@@ -77,6 +103,8 @@ public class GestionSeleccion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GestionJugador gestionjuga = new GestionJugador();
 				gestionjuga.setVisible(true);
+				
+				dispose();
 			}
 		});
 		
@@ -86,6 +114,7 @@ public class GestionSeleccion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GestionEntrenador gestionentre = new GestionEntrenador();
 				gestionentre.setVisible(true);
+				dispose();
 			}
 		});
 		
@@ -98,19 +127,22 @@ public class GestionSeleccion extends JFrame {
 	                try (PrintWriter writer = new PrintWriter(new FileWriter(pais.getText()+ ".csv", true))){
 	                	if (!archivoExiste) {
 	                		writer.print("Entrenador: ");
-	                		for (Entrenador entrenador : entrenadores) {
-		                		if (entrenador.getPais2().equals(pais.getText())) {
-		                			writer.println(entrenador.getNombre2() + "," + entrenador.getApellido2());
-								}
 		                    }
-	                		writer.print("");
-	                		writer.print("Jugadores: ");
-	                        writer.println("Nombre,Apellido,Edad,Pais"); // Cabecera del archivo CSV
-	                        for (Jugador jugador : jugadores) {
-		                		if (jugador.getPais2().equals(pais.getText())) {
-		                			writer.println(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
-								}
-		                    }
+	                	
+	                	for (Entrenador entrenador : entrenador1) {
+	                		if (entrenador.getPais2().equals(pais.getText())) {
+	                			writer.println(entrenador.getNombre2() + "," + entrenador.getApellido2());
+	                			}
+	                		}
+	                	
+	                	if (!archivoExiste) {
+	                		writer.println("");
+	                		writer.println("Jugadores: ");
+	                    }
+	                	for (Jugador jugador : jugador1) {
+	                		if (jugador.getPais2().equals(pais.getText())) {
+	                			writer.println(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
+							}
 	                    }
 	                	JOptionPane.showMessageDialog(null, "Jugadores guardados en " + pais.getText() + ".csv con éxito.");
 	                } catch (IOException ex) {
@@ -126,11 +158,50 @@ public class GestionSeleccion extends JFrame {
 	                    ex.printStackTrace();
 	                }
 	            }
-	        });
-		
-		
+	        });	
 	}
 	
+	private void cargarEntrenadores(ArrayList<Entrenador> entrenador1) {
+		// TODO Auto-generated method stub
+		File f = new File("entrenadores.csv");
+		try {
+			Scanner sc = new Scanner(f);
+			while(sc.hasNextLine()) {
+				String linea = sc.nextLine();
+				String[]campos = linea.split(",");
+				String nombre = campos[0];
+				String apellido = campos[1];
+				String edad = campos[2];
+				String pais = campos[3];
+				Entrenador nuevo = new Entrenador(nombre,apellido,edad,pais);
+				entrenador1.add(nuevo);
+			}
+		}catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void cargarJugadores(ArrayList<Jugador>jugador1) {
+		File f = new File("jugadores.csv");
+		try {
+			Scanner sc = new Scanner(f);
+			while(sc.hasNextLine()) {
+				String linea = sc.nextLine();
+				String[]campos = linea.split(",");
+				String nombre = campos[0];
+				String apellido = campos[1];
+				String edad = campos[2];
+				String pais = campos[3];
+				Jugador nuevo = new Jugador(nombre,apellido,edad,pais);
+				jugador1.add(nuevo);
+			}
+		}catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public static JTextField getPais() {
 		return pais;
 	}
