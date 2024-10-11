@@ -1,25 +1,19 @@
 package Mundial2026;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Font;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -120,7 +114,7 @@ public class GestionJugador extends JFrame {
         } catch (IOException e) {
         	JOptionPane.showMessageDialog(this, "Error ");
         }
-        
+                
 	}
 	
 	private void borrar() {
