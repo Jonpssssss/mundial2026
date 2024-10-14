@@ -79,10 +79,13 @@ public class GestionSeleccion extends JFrame {
 
 
         // Añadimos un JScrollPane para manejar varios jugadores
+        JPanel panelIzquierda = new JPanel(new BorderLayout()); // Divison del espacio
+        JLabel seleccion1 = new JLabel("JUGADORES SELECCIONADOS");
+        panelIzquierda.add(seleccion1, BorderLayout.NORTH);
         JScrollPane panel = new JScrollPane(jugadoresArea);
-        panel.setPreferredSize(new java.awt.Dimension(200, panel.getPreferredSize().height)); // Ancho fijo de 200
-
-        add(panel, BorderLayout.WEST);
+        panel.setPreferredSize(new java.awt.Dimension(200, 500)); 
+        panelIzquierda.add(panel);
+        add(panelIzquierda, BorderLayout.WEST);
         
 		
 		//System.out.println(jugadores);
