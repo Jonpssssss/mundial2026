@@ -11,8 +11,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,14 +32,29 @@ import Mundial2026.GestionJugador.Jugador;
 
 public class GestionSeleccion extends JFrame {
 	private static JTextField pais;
-	static ArrayList<Entrenador> entrenadores = new ArrayList<>();
-	static ArrayList<Jugador> jugadores = new ArrayList<>();
-	
 	public GestionSeleccion(){
 		setTitle("Seleccion");
 		setSize(1000,600);
 		setLocationRelativeTo(null);
 		setLayout(new BorderLayout());
+		
+		List<Entrenador> entrenadorLista = new ArrayList<>();
+		List<Jugador> jugadorLista = new ArrayList<>();
+		
+		cargarJugadores(jugadorLista);
+		cargarEntrenadores (entrenadorLista);
+		
+		DefaultListModel<Jugador> modeloLista = new DefaultListModel<>();
+		modeloLista.addAll(jugadorLista);
+		
+		JList<Jugador> jLista = new JList<>(modeloLista);
+		jLista.setFixedCellWidth(200);
+		jLista.setCellRenderer(new JugadorListCellRenderer());
+		
+		JScrollPane izquierda = new JScrollPane(jLista);
+		add(izquierda, BorderLayout.WEST);
+		
+		
 		JPanel panelCentral = new JPanel(new GridLayout(6, 2, 10, 10)); // Divison del espacio
 		
 		JLabel etiquetaPais = new JLabel("Introducce el pais: ");
@@ -56,39 +74,6 @@ public class GestionSeleccion extends JFrame {
         
         add(panelCentral, BorderLayout.CENTER);
         
-        ArrayList<Jugador> jugador1 = new ArrayList<>();
-        System.out.println(jugador1);
-		ArrayList<Entrenador>entrenador1 = new ArrayList<>();
-		
-		
-        cargarJugadores(jugador1);
-        System.out.println(jugador1);
-        //jugadores = jugador1;
-        cargarEntrenadores(entrenador1);
-        //entrenadores = entrenador1;
-        
-        JTextArea jugadoresArea = new JTextArea();
-        jugadoresArea.setEditable(false); // No editable
-        jugadoresArea.setLineWrap(true);  // Ajusta líneas automáticamente
-        jugadoresArea.setWrapStyleWord(true); // Ajusta palabras completas
-        
-     // Añadimos los jugadores al JTextArea
-        for (Jugador jugador : jugador1) {
-            jugadoresArea.append(jugador.getNombre2() + " " + jugador.getApellido2() + "\n");
-        }
-
-
-        // Añadimos un JScrollPane para manejar varios jugadores
-        JPanel panelIzquierda = new JPanel(new BorderLayout()); // Divison del espacio
-        JLabel seleccion1 = new JLabel("JUGADORES SELECCIONADOS");
-        panelIzquierda.add(seleccion1, BorderLayout.NORTH);
-        JScrollPane panel = new JScrollPane(jugadoresArea);
-        panel.setPreferredSize(new java.awt.Dimension(200, 500)); 
-        panelIzquierda.add(panel);
-        add(panelIzquierda, BorderLayout.WEST);
-        
-		
-		//System.out.println(jugadores);
 		
 		modificar.addActionListener(new ActionListener() {
 			
@@ -127,22 +112,18 @@ public class GestionSeleccion extends JFrame {
 		@Override
 	            public void actionPerformed(ActionEvent e) {
 				boolean archivoExiste = new File(pais.getText()+ ".csv").exists(); // Verificar si el archivo ya existe
-	                try (PrintWriter writer = new PrintWriter(new FileWriter(pais.getText()+ ".csv", true))){
-	                	if (!archivoExiste) {
-	                		writer.print("Entrenador: ");
-		                    }
-	                	
-	                	for (Entrenador entrenador : entrenador1) {
+	                try (PrintWriter writer = new PrintWriter(new FileWriter(pais.getText()+ ".csv", false))){
+
+	                	writer.print("Entrenador: ");
+	                	for (Entrenador entrenador : entrenadorLista) {
 	                		if (entrenador.getPais2().equals(pais.getText())) {
 	                			writer.println(entrenador.getNombre2() + "," + entrenador.getApellido2());
 	                			}
 	                		}
-	                	
-	                	if (!archivoExiste) {
-	                		writer.println("");
-	                		writer.println("Jugadores: ");
-	                    }
-	                	for (Jugador jugador : jugador1) {
+	                
+	                	writer.println("");
+                		writer.println("Jugadores: ");
+	                	for (Jugador jugador : jugadorLista) {
 	                		if (jugador.getPais2().equals(pais.getText())) {
 	                			writer.println(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2());
 							}
@@ -164,7 +145,7 @@ public class GestionSeleccion extends JFrame {
 	        });	
 	}
 	
-	private void cargarEntrenadores(ArrayList<Entrenador> entrenador1) {
+	private void cargarEntrenadores(List<Entrenador> entrenadorLista) {
 		// TODO Auto-generated method stub
 		File f = new File("entrenadores.csv");
 		try {
@@ -177,7 +158,7 @@ public class GestionSeleccion extends JFrame {
 				String edad = campos[2];
 				String pais = campos[3];
 				Entrenador nuevo = new Entrenador(nombre,apellido,edad,pais);
-				entrenador1.add(nuevo);
+				entrenadorLista.add(nuevo);
 			}
 		}catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -185,7 +166,7 @@ public class GestionSeleccion extends JFrame {
 		}
 	}
 
-	private void cargarJugadores(ArrayList<Jugador>jugador1) {
+	private void cargarJugadores(List<Jugador> jugadorLista) {
 		File f = new File("jugadores.csv");
 		try {
 			Scanner sc = new Scanner(f);
@@ -197,7 +178,7 @@ public class GestionSeleccion extends JFrame {
 				String edad = campos[2];
 				String pais = campos[3];
 				Jugador nuevo = new Jugador(nombre,apellido,edad,pais);
-				jugador1.add(nuevo);
+				jugadorLista.add(nuevo);
 			}
 		}catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -207,26 +188,6 @@ public class GestionSeleccion extends JFrame {
 
 	public static JTextField getPais() {
 		return pais;
-	}
-
-	public static void setPais(JTextField pais) {
-		GestionSeleccion.pais = pais;
-	}
-
-	public static ArrayList<Entrenador> getEntrenadores() {
-		return entrenadores;
-	}
-
-	public static void setEntrenadores(ArrayList<Entrenador> entrenadores) {
-		GestionSeleccion.entrenadores = entrenadores;
-	}
-
-	public static ArrayList<Jugador> getJugadores() {
-		return jugadores;
-	}
-
-	public static void setJugadores(ArrayList<Jugador> jugadores) {
-		GestionSeleccion.jugadores = jugadores;
 	}
 
 	public static void main(String[] args) {

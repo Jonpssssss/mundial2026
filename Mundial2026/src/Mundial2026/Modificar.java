@@ -22,14 +22,12 @@ import Mundial2026.GestionJugador.Jugador;
 
 public class Modificar extends JFrame {
 	private JComboBox<Jugador> comboBoxJugadores;
-	static ArrayList<Jugador> juga = new ArrayList<>();
 	private JTextField nombre;
 	private JTextField apellido;
 	private JTextField edad;
 	private JTextField pais;
     private JButton guardar;
-    private ArrayList<Jugador>jugar = new ArrayList<>();
-	
+    
 	 public Modificar() {
 	        // Configurar la ventana
 	        setTitle("Modificar Jugador");
@@ -38,19 +36,11 @@ public class Modificar extends JFrame {
 	        setLocationRelativeTo(null);
 	        setLayout(new GridLayout(7, 0, 10, 10));
 	        
+	        ArrayList<Jugador> jugadores = new ArrayList<>();
+	        cargarJugadores(jugadores);
 	        
-	        cargarJugadores(jugar);
 	        
-	        for (Jugador jugador : jugar) {
-	        	//System.out.println(GestionSeleccion.mirarSeleccion());
-				if(jugador.getPais2().equals(GestionSeleccion.mirarSeleccion())) {
-					juga.add(jugador);
-				}
-			}
-	        System.out.println(GestionSeleccion.getPais());
-	        System.out.println(juga);
-	        
-	        comboBoxJugadores = new JComboBox<>(juga.toArray(new Jugador[0]));
+	        comboBoxJugadores = new JComboBox<>(jugadores.toArray(new Jugador[0]));
 	        nombre = new JTextField();
 	        apellido = new JTextField();
 	        edad = new JTextField();
@@ -115,7 +105,7 @@ public class Modificar extends JFrame {
 					try (BufferedWriter bw = new BufferedWriter(new FileWriter(string))) {
 			            //bw.write("nombre,apellido,edad,pais\n"); // Cabecera
 			            //ArrayList<Jugador> jugadores = GestionSeleccion.getJugadores(); // Obtener la lista actualizada de jugadores
-			            for (Jugador jugador : juga) {
+			            for (Jugador jugador : jugadores) {
 			                bw.write(jugador.getNombre2() + "," + jugador.getApellido2() + "," + jugador.getEdad2() + "," + jugador.getPais2() + "\n");
 			            }
 			        }
@@ -124,7 +114,7 @@ public class Modificar extends JFrame {
 	        });
 	        
 	 }
-		private void cargarJugadores(ArrayList<Jugador>jugar) {
+		private void cargarJugadores(ArrayList<Jugador>jugadores) {
 			File f = new File("jugadores.csv");
 			try {
 				Scanner sc = new Scanner(f);
@@ -136,7 +126,7 @@ public class Modificar extends JFrame {
 					String edad = campos[2];
 					String pais = campos[3];
 					Jugador nuevo = new Jugador(nombre,apellido,edad,pais);
-					juga.add(nuevo);
+					jugadores.add(nuevo);
 				}
 			}catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
