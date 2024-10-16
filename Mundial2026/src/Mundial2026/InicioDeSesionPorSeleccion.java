@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+
 public class InicioDeSesionPorSeleccion extends JFrame {
 
     
@@ -28,8 +30,17 @@ public class InicioDeSesionPorSeleccion extends JFrame {
         
         JLabel cont = new JLabel("Contraseña:");
         JPasswordField contraseña = new JPasswordField();
+        
+        user.setFont(new Font("Times New Roman", Font.ITALIC,20));
+        cont.setFont(new Font("Times New Roman", Font.ITALIC,20));
+        
+        
 
         JButton iniciarSesion = new JButton("Iniciar Sesión");
+        
+        iniciarSesion.setFont(new Font("Times New Roman", Font.ITALIC,20));
+        
+        iniciarSesion.setBackground(Color.GRAY);
 
         // Añadir los componentes al panel
         panel.add(user);
@@ -73,4 +84,3 @@ public class InicioDeSesionPorSeleccion extends JFrame {
         SwingUtilities.invokeLater(() -> new InicioDeSesionPorSeleccion());
     }
 }
-
