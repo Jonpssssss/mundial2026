@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+
 public class InicioDeSesioPorSeleccion extends JFrame {
     private static final long serialVersionUID = 1L;
 
@@ -71,14 +72,15 @@ public class InicioDeSesioPorSeleccion extends JFrame {
         panelContenido.add(title, gbc);
 
         // Campo de usuario
-        JTextField usuario = new JTextField(20);
+        JTextField usuario = new JTextField("Usuario o Correo electronico", 20);
         estiloCampo(usuario);
-        usuario.setText("Usuario"); // Texto de marcador
-        usuario.setForeground(Color.GRAY); // Color del marcador
+        usuario.setForeground(new Color(200, 200, 200)); // Color del marcador más claro
+
+        // Enfocar el campo de usuario
         usuario.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (usuario.getText().equals("Usuario")) {
+                if (usuario.getText().equals("Usuario o Correo electronico")) {
                     usuario.setText("");
                     usuario.setForeground(Color.WHITE); // Cambiar color al escribir
                 }
@@ -87,11 +89,12 @@ public class InicioDeSesioPorSeleccion extends JFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 if (usuario.getText().isEmpty()) {
-                    usuario.setForeground(Color.GRAY); // Restablecer el color del marcador
-                    usuario.setText("Usuario"); // Restablecer texto
+                    usuario.setForeground(new Color(200, 200, 200)); // Restablecer el color del marcador
+                    usuario.setText("Usuario o Correo electronico"); // Restablecer texto
                 }
             }
         });
+
         gbc.gridwidth = 1; // Restablece a una columna
         gbc.gridy = 1; // Fila para el campo de usuario
         panelContenido.add(usuario, gbc);
@@ -100,14 +103,16 @@ public class InicioDeSesioPorSeleccion extends JFrame {
         JPasswordField contraseña = new JPasswordField(20);
         estiloCampo(contraseña);
         contraseña.setEchoChar((char) 0); // Muestra el texto como caracteres normales
+        contraseña.setForeground(new Color(200, 200, 200)); // Color del marcador más claro
         contraseña.setText("Contraseña"); // Texto de marcador
-        contraseña.setForeground(Color.GRAY); // Color del marcador
+
+        // Enfocar el campo de contraseña
         contraseña.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 if (String.valueOf(contraseña.getPassword()).equals("Contraseña")) {
                     contraseña.setEchoChar('●'); // Mostrar como caracter oculto
-                    contraseña.setText("");
+                    contraseña.setText(""); // Limpiar el campo
                     contraseña.setForeground(Color.WHITE); // Cambiar color al escribir
                 }
             }
@@ -116,30 +121,43 @@ public class InicioDeSesioPorSeleccion extends JFrame {
             public void focusLost(FocusEvent e) {
                 if (contraseña.getPassword().length == 0) {
                     contraseña.setEchoChar((char) 0); // Muestra el texto como caracteres normales
-                    contraseña.setForeground(Color.GRAY); // Restablecer el color del marcador
+                    contraseña.setForeground(new Color(200, 200, 200)); // Restablecer el color del marcador
                     contraseña.setText("Contraseña"); // Restablecer texto
+                } else {
+                    contraseña.setEchoChar('●'); // Restablecer el caracter oculto si hay texto
                 }
             }
         });
+
         gbc.gridy = 2; // Fila para el campo de contraseña
         panelContenido.add(contraseña, gbc);
-
-        // Checkbox de recordar
-        JCheckBox recordar = new JCheckBox("Recuerdame");
-        recordar.setOpaque(false); // Fondo transparente
-        recordar.setForeground(Color.WHITE);
-        gbc.gridy = 3; // Fila para el checkbox
-        panelContenido.add(recordar, gbc);
+//
+//        // Checkbox de recordar
+//        JCheckBox recordar = new JCheckBox("Recuerdame");
+//        recordar.setOpaque(false); // Fondo transparente
+//        recordar.setForeground(Color.WHITE);
+//        gbc.gridy = 3; // Fila para el checkbox
+//        panelContenido.add(recordar, gbc);
 
         // Botón de inicio de sesión
         JButton iniciarSesion = new JButton("Iniciar sesión");
         iniciarSesion.setFont(new Font("Arial", Font.BOLD, 16));
-        iniciarSesion.setBackground(new Color(229, 9, 20)); // Color rojo de Netflix
+        iniciarSesion.setBackground(Color.BLACK.darker());
         iniciarSesion.setForeground(Color.WHITE);
         iniciarSesion.setFocusPainted(false);
         gbc.gridy = 4; // Fila para el botón
         gbc.gridwidth = 2; // Ocupa dos columnas
         panelContenido.add(iniciarSesion, gbc);
+
+        // Botón "Crear cuenta"
+        JButton crearCuenta = new JButton("¿No tienes cuenta? Crear cuenta");
+        crearCuenta.setFont(new Font("Arial", Font.PLAIN, 14));
+        crearCuenta.setForeground(Color.WHITE);
+        crearCuenta.setContentAreaFilled(false); // Fondo transparente
+        crearCuenta.setBorderPainted(false); // Sin bordes
+        gbc.gridy = 5; // Fila para el botón de crear cuenta
+        gbc.gridwidth = 2; // Ocupa dos columnas
+        panelContenido.add(crearCuenta, gbc);
 
         // Añadir el panel de contenido al panel de fondo
         panelFondo.add(panelContenido, BorderLayout.CENTER);
@@ -147,7 +165,13 @@ public class InicioDeSesioPorSeleccion extends JFrame {
         // Añadir el panel a la ventana
         add(panelFondo);
 
-        // Añadir una acción al botón de inicio de sesión
+        // Hacer visible la ventana 
+        setVisible(true);
+        
+        // El foco está en el marco, así que no se coloca en usuario ni en contraseña
+        requestFocus(); 
+
+        // Acción del botón de inicio de sesión
         iniciarSesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -171,8 +195,15 @@ public class InicioDeSesioPorSeleccion extends JFrame {
             }
         });
 
-        // Hacer visible la ventana 
-        setVisible(true);
+        // Acción del botón de "Crear cuenta"
+        crearCuenta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Acción al hacer clic en "Crear cuenta"
+                JOptionPane.showMessageDialog(null, "Redirigiendo a la página de creación de cuenta...");
+                // Aquí puedes abrir una nueva ventana o llevar al usuario a una nueva página de registro
+            }
+        });
     }
 
     // Método para aplicar estilo a JTextField y JPasswordField
@@ -200,3 +231,6 @@ public class InicioDeSesioPorSeleccion extends JFrame {
         SwingUtilities.invokeLater(() -> new InicioDeSesioPorSeleccion());
     }
 }
+
+
+
