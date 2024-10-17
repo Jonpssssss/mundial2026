@@ -32,7 +32,7 @@ import Mundial2026.GestionJugador.Jugador;
 
 public class GestionSeleccion extends JFrame {
 	private static JTextField pais;
-	
+
 	public GestionSeleccion(){
 		setTitle("Seleccion");
 		setSize(1000,600);
