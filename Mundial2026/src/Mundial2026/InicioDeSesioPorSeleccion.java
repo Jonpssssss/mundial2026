@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-
 public class InicioDeSesioPorSeleccion extends JFrame {
     private static final long serialVersionUID = 1L;
 
