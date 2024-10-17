@@ -16,9 +16,12 @@ public class InicioDeSesioPorSeleccion extends JFrame {
 
     // Carga la imagen de fondo
     private BufferedImage fondo;
+    
+    private mapaUsuario mapa; // Instancia de UserManager
 
     // Constructor para inicializar la pantalla de inicio de sesión
     public InicioDeSesioPorSeleccion() {
+    	mapa = new mapaUsuario();
         // Configuración de la ventana principal
         setTitle("Iniciar Sesión");
         setSize(600, 400); // Tamaño de la ventana
@@ -178,21 +181,30 @@ public class InicioDeSesioPorSeleccion extends JFrame {
                 String usuario1 = usuario.getText();
                 String contraseña1 = new String(contraseña.getPassword());
                 GestionSeleccion gesSel = new GestionSeleccion();
-
-                // Validar usuario y contraseña
-                if (usuario1.equals("Usuario") || contraseña1.equals("Contraseña")) {
-                    JOptionPane.showMessageDialog(null, "Por favor ingrese usuario y contraseña.");
-                } else {
-                    // Simulando validación
-                    if (usuario1.equals("admin") && contraseña1.equals("admin")) {
-                        JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
-                        dispose(); // Cierra la ventana de inicio de sesión
-                        gesSel.setVisible(true); // Abre la siguiente ventana
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-                    }
-                }
+                
+                manejarSesion(usuario1, contraseña1);
             }
+
+			private void manejarSesion(String usuario1, String contraseña1) {
+		        GestionSeleccion gesSel = new GestionSeleccion(); // Ventana de gestión de selección
+		        
+		        System.out.println("Usuario ingresado: " + usuario1);
+		        System.out.println("Contraseña ingresada: " + contraseña1);
+
+
+		        // Validar usuario y contraseña
+		        if (mapa.validateUser(usuario1, contraseña1)) {
+		            JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
+		            String pais = mapa.getUserSelection(usuario1); // Obtener la selección del usuario
+		            gesSel.setPais(pais); // Pasar el país a la ventana de gestión
+		            dispose(); // Cierra la ventana de inicio de sesión
+		            gesSel.setVisible(true); // Abre la siguiente ventana
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+		        }
+
+				
+			}
         });
 
         // Acción del botón de "Crear cuenta"

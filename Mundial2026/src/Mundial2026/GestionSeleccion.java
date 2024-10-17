@@ -32,6 +32,7 @@ import Mundial2026.GestionJugador.Jugador;
 
 public class GestionSeleccion extends JFrame {
 	private static JTextField pais;
+	
 	public GestionSeleccion(){
 		setTitle("Seleccion");
 		setSize(1000,600);
@@ -57,9 +58,11 @@ public class GestionSeleccion extends JFrame {
 		
 		JPanel panelCentral = new JPanel(new GridLayout(6, 2, 10, 10)); // Divison del espacio
 		
-		JLabel etiquetaPais = new JLabel("Introducce el pais: ");
+		JLabel etiquetaPais = new JLabel("Seleccion: ");
+		
         pais = new JTextField();
-
+        pais.setEditable(false);
+        
         JButton botonAñadirJugadores = new JButton("Añadir Jugadores");
         JButton botonAñadirEntrenador = new JButton("Añadir Entrenador");
         JButton botonAñadirSeleccion = new JButton("Añadir Seleccion");
@@ -144,6 +147,10 @@ public class GestionSeleccion extends JFrame {
 	            }
 	        });	
 	}
+	
+	public void setPais(String pais) {
+        this.pais.setText(pais);
+    }
 	
 	private void cargarEntrenadores(List<Entrenador> entrenadorLista) {
 		// TODO Auto-generated method stub
