@@ -134,13 +134,6 @@ public class InicioDeSesioPorSeleccion extends JFrame {
 
         gbc.gridy = 2; // Fila para el campo de contraseña
         panelContenido.add(contraseña, gbc);
-//
-//        // Checkbox de recordar
-//        JCheckBox recordar = new JCheckBox("Recuerdame");
-//        recordar.setOpaque(false); // Fondo transparente
-//        recordar.setForeground(Color.WHITE);
-//        gbc.gridy = 3; // Fila para el checkbox
-//        panelContenido.add(recordar, gbc);
 
         // Botón de inicio de sesión
         JButton iniciarSesion = new JButton("Iniciar sesión");
@@ -183,6 +176,7 @@ public class InicioDeSesioPorSeleccion extends JFrame {
                 GestionSeleccion gesSel = new GestionSeleccion();
                 
                 manejarSesion(usuario1, contraseña1);
+                dispose();
             }
 
 			private void manejarSesion(String usuario1, String contraseña1) {
@@ -190,7 +184,6 @@ public class InicioDeSesioPorSeleccion extends JFrame {
 		        
 		        System.out.println("Usuario ingresado: " + usuario1);
 		        System.out.println("Contraseña ingresada: " + contraseña1);
-
 
 		        // Validar usuario y contraseña
 		        if (mapa.validateUser(usuario1, contraseña1)) {
@@ -201,9 +194,7 @@ public class InicioDeSesioPorSeleccion extends JFrame {
 		            gesSel.setVisible(true); // Abre la siguiente ventana
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-		        }
-
-				
+		        }				
 			}
         });
 
@@ -211,9 +202,9 @@ public class InicioDeSesioPorSeleccion extends JFrame {
         crearCuenta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Acción al hacer clic en "Crear cuenta"
-                JOptionPane.showMessageDialog(null, "Redirigiendo a la página de creación de cuenta...");
-                // Aquí puedes abrir una nueva ventana o llevar al usuario a una nueva página de registro
+                CreacionDeUsuario creacionDeUsuario = new CreacionDeUsuario();
+            	creacionDeUsuario.setVisible(true);
+            	dispose();
             }
         });
     }
