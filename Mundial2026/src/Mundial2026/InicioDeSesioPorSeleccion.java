@@ -17,15 +17,16 @@ public class InicioDeSesioPorSeleccion extends JFrame {
     // Carga la imagen de fondo
     private BufferedImage fondo;
     
-    private mapaUsuario mapa; // Instancia de UserManager
+    private mapaUsuario mapa;
 
     // Constructor para inicializar la pantalla de inicio de sesión
     public InicioDeSesioPorSeleccion() {
     	mapa = new mapaUsuario();
+    
         // Configuración de la ventana principal
         setTitle("Iniciar Sesión");
         setSize(600, 400); // Tamaño de la ventana
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         setLocationRelativeTo(null); // Centra la ventana en la pantalla
 
         // Cargar la imagen de fondo desde la ruta local
@@ -154,6 +155,7 @@ public class InicioDeSesioPorSeleccion extends JFrame {
         gbc.gridy = 5; // Fila para el botón de crear cuenta
         gbc.gridwidth = 2; // Ocupa dos columnas
         panelContenido.add(crearCuenta, gbc);
+        
 
         // Añadir el panel de contenido al panel de fondo
         panelFondo.add(panelContenido, BorderLayout.CENTER);
@@ -176,7 +178,6 @@ public class InicioDeSesioPorSeleccion extends JFrame {
                 GestionSeleccion gesSel = new GestionSeleccion();
                 
                 manejarSesion(usuario1, contraseña1);
-                dispose();
             }
 
 			private void manejarSesion(String usuario1, String contraseña1) {
@@ -232,6 +233,8 @@ public class InicioDeSesioPorSeleccion extends JFrame {
     public static void main(String[] args) {
         // Ejecutar la pantalla de inicio de sesión
         SwingUtilities.invokeLater(() -> new InicioDeSesioPorSeleccion());
+//        InicioDeSesioPorSeleccion creacion = new InicioDeSesioPorSeleccion();
+//		creacion.setVisible(true);
     }
 }
 
