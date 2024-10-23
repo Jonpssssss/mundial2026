@@ -87,14 +87,14 @@ public class GestionSeleccion extends JFrame {
 				modifi.setVisible(true);
 				dispose();
 			}
-		});		
+		});
+		
 		botonAñadirJugadores.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GestionJugador gestionjuga = new GestionJugador();
-				gestionjuga.setVisible(true);
-				
+				gestionjuga.setVisible(true);			
 				dispose();
 			}
 		});

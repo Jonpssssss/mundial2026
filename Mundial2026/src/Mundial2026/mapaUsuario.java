@@ -7,21 +7,15 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class mapaUsuario {
-//    private Map<String, String> usuarios = new HashMap<>(); // Almacena usuarios y contraseñas
     private Map<String, String> usuarios1 = new HashMap<>(); // Almacena usuarios y contraseñas
     private Map<String, String> selecciones = new HashMap<>(); // Almacena usuarios y sus selecciones
 
     public mapaUsuario() {
-      cargarUsuarios(); // Cargar usuarios al iniciar
-    	//usuarios = new HashMap<>();
-        // Agregar usuarios de ejemplo (usuario, contraseña)
-//        usuarios.put("usuario1", "contraseña1");
-//        usuarios.put("usuario2", "contraseña2");
-      
+      cargarUsuarios(); // Cargar usuarios al iniciar  
       System.out.println(usuarios1);
     }
 
-    private void cargarUsuarios() {
+    void cargarUsuarios() {
         File f = new File("usuarios.csv"); // Ruta al archivo CSV
         try (
         	Scanner sc = new Scanner(f)) {
