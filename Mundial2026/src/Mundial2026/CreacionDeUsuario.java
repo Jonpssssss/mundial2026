@@ -14,9 +14,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class CreacionDeUsuario extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField nombre;
 	private JTextField contra;
 	private JTextField seleccion;
@@ -35,7 +40,7 @@ public class CreacionDeUsuario extends JFrame {
 	    JLabel usuario = new JLabel("Nombre de usuario: ");
 	    nombre = new JTextField();
 	    JLabel contraseña = new JLabel("Contraseña: ");
-	    contra = new JTextField();
+	    contra = new JPasswordField();
 	    JLabel pais = new JLabel("Introduce tu Pais: ");
 	    seleccion = new JTextField();
 	    
