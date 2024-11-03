@@ -97,7 +97,7 @@ public class SorteoGrupos extends JFrame{
 			}
 		}catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace();	
 		}
 	}
 	public static void main(String[] args) {

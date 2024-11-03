@@ -3,14 +3,21 @@ package Mundial2026;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class Arbitro extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField nombre;
 	private JTextField apellido;
 	private JTextField edad;
@@ -60,12 +67,34 @@ public class Arbitro extends JFrame {
                 // Obtener el nombre, apellido, edad y pais desde los campos de texto
                 String nombre1 = nombre.getText();
                 String apellido1 = apellido.getText();
-                String edad1 = edad.getText();
                 String pais1 = pais.getText();
+                
+                if (nombre.getText().isEmpty() || apellido.getText().isEmpty() || edad.getText().isEmpty() || pais.getText().isEmpty()) {
+                    resultado.setText("Todos los campos son obligatorios.");
+                    return;
+                }
+                
+                
+                try {
+                	int edad1 = Integer.parseInt(edad.getText());
+                	resultado.setText("Nombre Completo: " + nombre1 + " " + apellido1 + " , Edad: " + edad1 + " , Pais: "+ pais1);
+                }catch (NumberFormatException ex){
+                	resultado.setText("Edad debe ser un numero.");
+                }
 
-                // Mostrar el resultado en la etiqueta
-                resultado.setText("Nombre Completo: " + nombre1 + " " + apellido1 + " , Edad: " + edad1 + " , Pais: "+ pais1);
             }
+        });
+        guardarDatos.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try (FileWriter writer = new FileWriter("arbitros.csv", true)){
+					writer.write(nombre.getText() + "," + apellido.getText() + "," + edad.getText() + "," + pais.getText() + "\n");
+					JOptionPane.showMessageDialog(null, "Datos guardados con exito.");
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(null, "Error al guardar los datos.");;
+				}
+			}
+        	
         });
     }
 		
